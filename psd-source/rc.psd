@@ -22,7 +22,7 @@ case "$1" in
 			printf "\n${C_FAIL}Error:${C_CLEAR} Profile-Sync-Daemon is already running!"
 			stat_fail && exit 1
 		fi
-
+		/usr/bin/profile-sync-daemon check
 		add_daemon psd
 		/usr/bin/profile-sync-daemon sync
 		stat_done
