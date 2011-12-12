@@ -15,6 +15,9 @@ set_which() {
 		opera)
 			[[ "$i" = "opera" ]] && STATIC="/home/$user/.$i-backup" && LINK="/home/$user/.$i"
 			;;
+		midori)
+			[[ "$i" = "midori" ]] && STATIC="/home/$user/.config/$i-backup" && LINK="/home/$user/.config/$i"
+			;;
 		*)
 			# this should never happen
 			exit 1
@@ -35,7 +38,7 @@ check() {
 sync() {
 	# sync profiles to tmpfs and back again
 	for user in $USERS; do
-		for i in mozilla chromium opera; do
+		for i in mozilla chromium opera midori; do
 			set_which
 			# check if user has browser profile
 			if [[ -d $LINK ]]; then
@@ -64,7 +67,7 @@ sync() {
 unsync() {
 	# restore virgin state of profiles on physical discs
 	for user in $USERS; do
-		for i in mozilla chromium opera; do
+		for i in mozilla chromium opera midori; do
 			set_which
 			# check if user has browser profile
 			if [[ -h $LINK ]]; then
