@@ -18,6 +18,9 @@ set_which() {
 		midori)
 			[[ "$i" = "midori" ]] && STATIC="/home/$user/.config/$i-backup" && LINK="/home/$user/.config/$i"
 			;;
+		google-chrome)
+			[[ "$i" = "google-chrome" ]] && STATIC="/home/$user/.config/$i-backup" && LINK="/home/$user/.config/$i"
+			;;
 		*)
 			# this should never happen
 			exit 1
@@ -27,7 +30,7 @@ set_which() {
 check() {
 	# crash recovery
 	for user in $USERS; do
-		for i in mozilla chromium opera; do
+		for i in mozilla chromium opera google-chrome; do
 			set_which
 			[[ -h $LINK ]] && rm -f $LINK
 			[[ -d $STATIC ]] && mv $STATIC $LINK
@@ -38,7 +41,7 @@ check() {
 sync() {
 	# sync profiles to tmpfs and back again
 	for user in $USERS; do
-		for i in mozilla chromium opera midori; do
+		for i in mozilla chromium opera midori google-chrome; do
 			set_which
 			# check if user has browser profile
 			if [[ -d $LINK ]]; then
@@ -67,7 +70,7 @@ sync() {
 unsync() {
 	# restore virgin state of profiles on physical discs
 	for user in $USERS; do
-		for i in mozilla chromium opera midori; do
+		for i in mozilla chromium opera midori google-chrome; do
 			set_which
 			# check if user has browser profile
 			if [[ -h $LINK ]]; then
